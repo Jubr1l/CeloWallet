@@ -1,3 +1,9 @@
+![demo](demo.png)
+
+# Inspiration behind the project
+
+https://www.youtube.com/watch?v=XyMaT3qASYk&t=9s
+
 # Getting Started
 
 Before you can operate this dapp you will need to fulfill the following requirements
@@ -41,7 +47,9 @@ https://chrome.google.com/webstore/detail/celoextensionwallet/kkilomkmpmkbdnfelc
 
 ## Using the Dapp
 
-Initiall you would notice that the 
+Initially you would notice that the indicator at the top right which changes from loading ...  *** to no name give *** 
+
+you can use the create name button to create an alias for yourself which others will use to find you wallet address easily and send money easily
 
 
 ## Build
