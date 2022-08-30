@@ -49,7 +49,11 @@ https://chrome.google.com/webstore/detail/celoextensionwallet/kkilomkmpmkbdnfelc
 
 Initially you would notice that the indicator at the top right which changes from loading ...  *** to no name give *** 
 
-you can use the create name button to create an alias for yourself which others will use to find you wallet address easily and send money easily
+you can use the create name button to create an alias for yourself which others will use to find you wallet address easily and send money easily.
+
+Currently if you submit name like 'dacader','helloworld' etc it will provide the wallet address associated with it like in the example below
+
+![sending page](submitaddress.png)
 
 
 ## Build
