@@ -1,7 +1,7 @@
 import Web3 from 'web3'
 import { newKitFromWeb3 } from '@celo/contractkit'
 import BigNumber from "bignumber.js"
-import marketplaceAbi from '../contract/marketplace.abi.json'
+import cnsAbi from '../contract/cns.abi.json'
 import erc20Abi from '../contract/erc20.abi.json'
 
 // Most of the variables were left the same as the tutorial to make it easy to read
@@ -27,7 +27,7 @@ const connectCeloWallet = async function () {
       kit = newKitFromWeb3(web3)
       const accounts = await kit.web3.eth.getAccounts()
       kit.defaultAccount = accounts[0]
-      contract = new kit.web3.eth.Contract(marketplaceAbi, MPContractAddress)
+      contract = new kit.web3.eth.Contract(cnsAbi, MPContractAddress)
     } catch (error) {
       notification(`⚠️ ${error}.`)
     }
@@ -48,11 +48,17 @@ async function approve(_price) {
 
 document.querySelector("#sendcelo").addEventListener("click", async(e)=> { // Runs the code written below once the send celo button in line 119 of the index.html file in pulic folder is triggered
   const shownamount = document.getElementById("amount").value // Get the value of the textfield called amount as it is wriiten in the modal of the send button 
-  const amountSent = new BigNumber(document.getElementById("amount").value).shiftedBy(ERC20_DECIMALS) //converts the amount written to a big number that will give us the equivalent of what we want to transfer in cUSD
+  const amountSent = new BigNumber(shownamount).shiftedBy(ERC20_DECIMALS) //converts the amount written to a big number that will give us the equivalent of what we want to transfer in cUSD
   const receiver = document.getElementById("addressing").value //The the value of the address you want to send celo to
   notification("⌛ Waiting for approval to send money...")
   try{
+    
+
     $('.modal').modal('close'); //Closes modal first so user can see the notification
+    if(!Web3.utils.isAddress(receiver,44787)){
+      notification(`⚠️ Invalid receiver address: ${receiver}.`);
+      return;     
+    }
     await approve(amountSent) //Run the approval code which will create a pop up for your celo wallet
       notification(`⌛ Sending `+ shownamount + ' cUSD to ' + receiver )
       try{
@@ -86,7 +92,7 @@ const getBalance = async function () { // This functions get the balance of my c
 }
 
 const getName = async function(){ //Pretty self explanatory function name, It gets the name assigned to the celo wallet if any 
-  var _yourname = await contract.methods.userAddressLink(kit.defaultAccount).call()
+  let _yourname = await contract.methods.userAddressLink(kit.defaultAccount).call()
   const noname = "You have not added a name"
   if(_yourname == ""){
     _yourname = noname
@@ -111,7 +117,10 @@ const provideAddress = async function(){
 const createName = async function(){
   document.querySelector('#submitName').addEventListener("click", async (e)=> {
     const chosenName = document.getElementById("getname").value
-    console.log(chosenName)
+    if(chosenName === ""){
+      notification(`⚠️ Username is empty : ${chosenName}.`)
+      return;
+    }
     notification(`⌛ Your new name will be  `+  chosenName )
     try{
       $('.modal').modal('close');
@@ -126,7 +135,7 @@ const createName = async function(){
         getName();
     }
     catch(error){
-
+      notification(`⚠️ ${error}.`)
     }
   } )
 } 
