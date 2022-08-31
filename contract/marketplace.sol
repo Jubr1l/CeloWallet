@@ -47,6 +47,12 @@ contract CNS{
         require(addressResult ==  0x0000000000000000000000000000000000000000, "This username is already taken");
         _;
     } 
+    
+    function checkuser(string memory username) public view returns(address){
+        address resultaddress = user[username];
+
+        return resultaddress;
+    } 
 
     //The function that allows a user add a username to their celo wallet address
     function addUser(string memory _inputtedusername) public CheckBooleanLink UsernameAvailability(_inputtedusername){
