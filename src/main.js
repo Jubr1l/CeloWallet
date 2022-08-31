@@ -131,6 +131,31 @@ const createName = async function(){
   } )
 } 
 
+const checkingname = async function(){
+  document.querySelector('#checkname').addEventListener("click", async (e)=> {
+    const desiredUsername = document.getElementById("usernamecheck").value
+    console.log(desiredUsername)
+    notification(`Checking to see if ` + desiredUsername + ` is available for you` )
+    try{
+      const Result = await contract.methods.checkuser(desiredUsername).call()
+      if(Result == "0x0000000000000000000000000000000000000000"){
+        notification(desiredUsername + ` is available for your use`)
+        setTimeout(function(){
+          notificationOff();
+        }, 5000);
+      }
+      else{
+        notification(desiredUsername + ` is currently taken`)
+        setTimeout(function(){
+          notificationOff();
+        }, 5000);
+      }
+    }
+    catch(error){
+    }
+  })
+}
+
 
 // Listener Functions
 
@@ -141,6 +166,7 @@ window.addEventListener('load', async () => {
   await getName()
   await provideAddress()
   await createName()
+  await checkingname()
   notificationOff()
 });
 
