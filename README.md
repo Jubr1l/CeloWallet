@@ -1,5 +1,9 @@
 ![demo](demo.png)
 
+# LIVE DEMO
+
+https://jubr1l.github.io/CeloWallet/
+
 # Inspiration behind the project
 
 https://www.youtube.com/watch?v=XyMaT3qASYk&t=9s
