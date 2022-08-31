@@ -62,6 +62,26 @@
                     </div>
                 </div>
 
+                <!-- A search field for users to search if the username is available before using it than leaving it up to the errored transaction provided by the wallet -->
+                <!-- This will enable easy debugging -->
+
+                
+
+                <div class="col s12 m4 offset-m4">
+                    <br><br><br>
+                    <div class="input-field">
+                        
+                        <i class="material-icons prefix">person</i>
+
+                        <input placeholder="Enter username to check if it is available for you" id="usernamecheck" type="text">
+                        <label for="username">Username</label><br><br>
+
+                        <a class="col s12 col m4 offset-m4 teal white-text waves-effect waves-pink btn-flat" id="checkname">Check Availability</a>
+
+                    </div>
+
+                </div>
+
                 <!-- This is a modal that is targeted by the Create Name button in line 59. It will open when the button is tapped -->
                 <div id="modal2" class="modal ">
                     <div class="modal-content">
